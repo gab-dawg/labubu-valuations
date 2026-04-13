@@ -4,227 +4,364 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Labubu Valuations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f7f4ee;
-      --surface: #ffffff;
-      --text: #221f1a;
-      --muted: #6f6a63;
-      --line: #e5ddd3;
-      --accent: #0d6c70;
-      --accent-soft: #e7f3f3;
-      --shadow: 0 10px 30px rgba(0,0,0,.06);
+      --pink: #ff6b9d;
+      --pink-light: #ffe0ec;
+      --pink-dark: #e84580;
+      --purple: #c084fc;
+      --purple-light: #f0e0ff;
+      --yellow: #fbbf24;
+      --mint: #6ee7b7;
+      --mint-light: #d1fae5;
+      --blue: #7dd3fc;
+      --bg: #fff5f9;
+      --card: #ffffff;
+      --text: #3d1f3a;
+      --muted: #9a7b96;
+      --line: #f5d5e6;
+      --shadow: 0 8px 32px rgba(255,107,157,.12);
+      --shadow-lg: 0 16px 48px rgba(255,107,157,.18);
     }
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #f8f4ef 0%, #f4efe8 100%);
+      font-family: 'Fredoka', sans-serif;
+      background: var(--bg);
       color: var(--text);
+      min-height: 100vh;
     }
+    .bg-blobs {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .blob {
+      position: absolute; border-radius: 50%; filter: blur(80px); opacity: .35;
+    }
+    .blob-1 { width: 500px; height: 500px; background: #ffb6d5; top: -100px; left: -100px; }
+    .blob-2 { width: 400px; height: 400px; background: #c4b5fd; top: 200px; right: -80px; }
+    .blob-3 { width: 350px; height: 350px; background: #fbcfe8; bottom: -50px; left: 30%; }
+    .blob-4 { width: 300px; height: 300px; background: #a5f3fc; top: 50%; left: 10%; }
     .wrap {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 28px 18px 80px;
+      position: relative; z-index: 1;
+      max-width: 1200px; margin: 0 auto; padding: 24px 16px 80px;
     }
-    .hero { padding: 28px 0 20px; }
-    .eyebrow {
+    .header {
+      text-align: center; padding: 40px 0 24px;
+    }
+    .logo-emoji {
+      font-size: 64px; margin-bottom: 8px;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    .badge {
       display: inline-block;
-      padding: 6px 10px;
+      padding: 6px 16px;
       border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent);
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: white;
       font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .04em;
+      font-weight: 600;
+      letter-spacing: .06em;
       text-transform: uppercase;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
-    h1 { font-size: 44px; line-height: 1.05; margin: 0 0 12px; }
+    h1 {
+      font-size: 48px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--pink-dark), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
     .sub {
       color: var(--muted);
-      font-size: 18px;
-      max-width: 760px;
-      line-height: 1.6;
-      margin: 0 0 24px;
+      font-size: 17px;
+      max-width: 600px;
+      margin: 0 auto 28px;
+      line-height: 1.5;
     }
     .stats {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      margin: 20px 0 28px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
     }
-    .stat {
-      background: rgba(255,255,255,.7);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 16px;
+    .stat-card {
+      background: var(--card);
+      border: 2px solid var(--line);
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
       box-shadow: var(--shadow);
+      transition: transform .2s;
     }
-    .stat-label { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
-    .stat-value { font-size: 26px; font-weight: 700; }
+    .stat-card:hover { transform: translateY(-4px); }
+    .stat-icon { font-size: 28px; margin-bottom: 6px; }
+    .stat-label { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .stat-val { font-size: 28px; font-weight: 700; color: var(--pink-dark); }
     .controls {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
+      display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 20px;
     }
     .search {
-      flex: 1 1 280px;
-      min-width: 260px;
-      padding: 13px 14px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: var(--surface);
-      font-size: 16px;
+      flex: 1 1 300px;
+      padding: 14px 18px;
+      border-radius: 16px;
+      border: 2px solid var(--line);
+      background: white;
+      font-family: inherit;
+      font-size: 15px;
       outline: none;
+      transition: border-color .2s, box-shadow .2s;
     }
     .search:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 4px rgba(13,108,112,.12);
+      border-color: var(--pink);
+      box-shadow: 0 0 0 4px rgba(255,107,157,.15);
     }
-    .button {
-      border: 0;
-      border-radius: 12px;
-      background: var(--accent);
-      color: white;
-      padding: 13px 16px;
-      font-weight: 700;
+    .search::placeholder { color: #d4a0c0; }
+    .filter-btn {
+      padding: 12px 20px;
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      background: white;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
       cursor: pointer;
+      transition: all .2s;
     }
-    .panel {
-      background: rgba(255,255,255,.8);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      overflow: hidden;
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--pink);
+      background: var(--pink-light);
+      color: var(--pink-dark);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 18px;
+    }
+    .item-card {
+      background: var(--card);
+      border: 2px solid var(--line);
+      border-radius: 24px;
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
       box-shadow: var(--shadow);
+      transition: all .25s;
+      cursor: default;
     }
-    .table-wrap { overflow-x: auto; }
-    table { width: 100%; min-width: 880px; border-collapse: collapse; }
-    th, td {
-      text-align: left;
-      padding: 15px 16px;
-      border-bottom: 1px solid var(--line);
-      vertical-align: middle;
+    .item-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--pink);
     }
-    th {
-      background: #161514;
-      color: white;
-      font-size: 13px;
-      letter-spacing: .02em;
+    .item-img {
+      width: 80px; height: 80px;
+      border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 40px;
+      flex-shrink: 0;
     }
-    tbody tr:hover td { background: #fbfaf8; }
-    .name { font-weight: 700; }
-    .series { color: var(--muted); font-size: 14px; margin-top: 4px; }
-    .pill {
-      display: inline-block;
-      padding: 5px 10px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-size: 12px;
+    .item-info { flex: 1; min-width: 0; }
+    .item-name {
+      font-size: 16px;
       font-weight: 700;
-      white-space: nowrap;
+      margin-bottom: 2px;
+      color: var(--text);
     }
-    .footer-note {
+    .item-series {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .price-row {
+      display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+    }
+    .price-tag {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 4px 10px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .price-retail {
+      background: var(--mint-light);
+      color: #047857;
+    }
+    .price-market {
+      background: var(--pink-light);
+      color: var(--pink-dark);
+    }
+    .rarity-pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .rarity-common { background: #e0f2fe; color: #0369a1; }
+    .rarity-secret { background: linear-gradient(135deg, #fde68a, #fbbf24); color: #92400e; }
+    .rarity-limited { background: linear-gradient(135deg, #e9d5ff, #c084fc); color: #6b21a8; }
+    .rarity-seasonal { background: #ffe4e6; color: #be123c; }
+    .rarity-collab { background: linear-gradient(135deg, #a5f3fc, #67e8f9); color: #155e75; }
+    .rarity-mega { background: linear-gradient(135deg, #fecdd3, #ff6b9d); color: #881337; }
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 24px;
       color: var(--muted);
       font-size: 14px;
-      padding: 16px 2px 0;
-      line-height: 1.6;
     }
-    @media (max-width: 820px) {
-      h1 { font-size: 34px; }
-      .sub { font-size: 16px; }
+    .footer a { color: var(--pink); text-decoration: none; }
+    .sparkle { display: inline-block; animation: sparkle 1.5s ease-in-out infinite; }
+    @keyframes sparkle {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .6; transform: scale(1.2); }
+    }
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+    @media (max-width: 700px) {
+      h1 { font-size: 36px; }
       .stats { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .logo-emoji { font-size: 48px; }
     }
   </style>
 </head>
 <body>
+  <div class="bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+  </div>
   <div class="wrap">
-    <section class="hero">
-      <div class="eyebrow">Collector Tracker</div>
+    <header class="header">
+      <div class="logo-emoji">👾</div>
+      <div class="badge"><span class="sparkle">✨</span> Collector Tracker <span class="sparkle">✨</span></div>
       <h1>Labubu Valuations</h1>
       <p class="sub">
-        A clean tracker for estimated retail and resale values across Labubu figures,
-        secret pulls, and larger-format releases.
+        Your cute guide to retail & resale values for every Labubu figure, secret pull, mega drop, and collab release 🌸
       </p>
       <div class="stats">
-        <div class="stat">
-          <div class="stat-label">Tracked items</div>
-          <div class="stat-value" id="stat-count">0</div>
+        <div class="stat-card">
+          <div class="stat-icon">📦</div>
+          <div class="stat-label">Tracked Items</div>
+          <div class="stat-val" id="s-count">0</div>
         </div>
-        <div class="stat">
-          <div class="stat-label">Secret editions</div>
-          <div class="stat-value" id="stat-secret">0</div>
+        <div class="stat-card">
+          <div class="stat-icon">🌟</div>
+          <div class="stat-label">Secret Editions</div>
+          <div class="stat-val" id="s-secret">0</div>
         </div>
-        <div class="stat">
-          <div class="stat-label">Last updated</div>
-          <div class="stat-value" id="stat-date">--</div>
+        <div class="stat-card">
+          <div class="stat-icon">📅</div>
+          <div class="stat-label">Last Updated</div>
+          <div class="stat-val" id="s-date" style="font-size:18px">--</div>
         </div>
       </div>
-    </section>
+    </header>
     <div class="controls">
-      <input id="search" class="search" type="text" placeholder="Search by name, series, or rarity" />
-      <button class="button" onclick="resetSearch()">Reset</button>
+      <input class="search" id="search" type="text" placeholder="🔍 Search Labubu by name, series, or rarity..." />
+      <button class="filter-btn" data-filter="all" onclick="setFilter('all')">All</button>
+      <button class="filter-btn" data-filter="secret" onclick="setFilter('secret')">🌟 Secret</button>
+      <button class="filter-btn" data-filter="limited" onclick="setFilter('limited')">💎 Limited</button>
+      <button class="filter-btn" data-filter="collab" onclick="setFilter('collab')">🤝 Collab</button>
     </div>
-    <section class="panel">
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Retail</th>
-              <th>Market Range</th>
-              <th>Rarity</th>
-              <th>Last Updated</th>
-            </tr>
-          </thead>
-          <tbody id="rows"></tbody>
-        </table>
-      </div>
-    </section>
-    <p class="footer-note">
-      These are starter placeholder values. Next phase: add every Labubu release with sourced pricing.
-    </p>
+    <div class="grid" id="grid"></div>
+    <div class="no-results" id="no-results" style="display:none">
+      😢 No Labubus found... try a different search!
+    </div>
+    <footer class="footer">
+      Made with 💖 for Labubu collectors everywhere<br>
+      Prices are estimated market ranges. <a href="https://www.popmart.com/us/collection/11" target="_blank">Browse official Pop Mart releases</a>
+    </footer>
   </div>
   <script>
     const items = [
-      { name: "Labubu Classic Blind Box", series: "The Monsters", retail: "$12-$16", market: "$15-$40", rarity: "Common", updated: "2026-04-13" },
-      { name: "Labubu Have a Seat", series: "Have a Seat Series", retail: "$13-$17", market: "$20-$55", rarity: "Common", updated: "2026-04-13" },
-      { name: "Labubu Macaron", series: "Macaron Series", retail: "$14-$18", market: "$25-$70", rarity: "Common", updated: "2026-04-13" },
-      { name: "Labubu Secret (Have a Seat)", series: "Have a Seat Series", retail: "$13-$17", market: "$200+", rarity: "Secret", updated: "2026-04-13" },
-      { name: "Labubu Secret (Macaron)", series: "Macaron Series", retail: "$14-$18", market: "$250+", rarity: "Secret", updated: "2026-04-13" },
-      { name: "Labubu x SpongeBob", series: "Collaboration", retail: "$16-$20", market: "$30-$80", rarity: "Collab", updated: "2026-04-13" },
-      { name: "Mega Collection 1000% Labubu", series: "Mega Series", retail: "$950", market: "$1200+", rarity: "Limited", updated: "2026-04-13" },
-      { name: "Labubu Plush Keychain", series: "The Monsters Plush", retail: "$10-$14", market: "$15-$45", rarity: "Common", updated: "2026-04-13" },
-      { name: "Labubu Zimomo", series: "Zimomo Series", retail: "$14-$18", market: "$20-$60", rarity: "Common", updated: "2026-04-13" },
-      { name: "Labubu Secret (Zimomo)", series: "Zimomo Series", retail: "$14-$18", market: "$300+", rarity: "Secret", updated: "2026-04-13" },
-      { name: "Labubu Lucky Cat", series: "Seasonal Release", retail: "$25-$35", market: "$50-$120", rarity: "Seasonal", updated: "2026-04-13" },
-      { name: "Labubu Elf on the Shelf", series: "Holiday Edition", retail: "$20-$30", market: "$40-$90", rarity: "Seasonal", updated: "2026-04-13" }
+      { name:"Labubu Classic Blind Box", series:"The Monsters", retail:"$12-$16", market:"$15-$40", rarity:"common", emoji:"👾", bg:"#ffe0ec", updated:"2026-04-13" },
+      { name:"Labubu Have a Seat - Strawberry", series:"Have a Seat Series", retail:"$22", market:"$35-$65", rarity:"common", emoji:"🍓", bg:"#fecdd3", updated:"2026-04-13" },
+      { name:"Labubu Have a Seat - Blueberry", series:"Have a Seat Series", retail:"$22", market:"$30-$55", rarity:"common", emoji:"🪷", bg:"#dbeafe", updated:"2026-04-13" },
+      { name:"Labubu Macaron - Lychee Berry", series:"Exciting Macaron", retail:"$28", market:"$45-$90", rarity:"common", emoji:"🫇", bg:"#fce7f3", updated:"2026-04-13" },
+      { name:"Labubu Macaron - Sea Salt Coconut", series:"Exciting Macaron", retail:"$28", market:"$35-$70", rarity:"common", emoji:"🥥", bg:"#ecfdf5", updated:"2026-04-13" },
+      { name:"Labubu Macaron - Toffee", series:"Exciting Macaron", retail:"$28", market:"$30-$55", rarity:"common", emoji:"🍬", bg:"#fef3c7", updated:"2026-04-13" },
+      { name:"Labubu Secret (Have a Seat)", series:"Have a Seat Series", retail:"$22", market:"$200-$350", rarity:"secret", emoji:"🌟", bg:"linear-gradient(135deg,#fef9c3,#fde68a)", updated:"2026-04-13" },
+      { name:"Labubu Secret (Macaron)", series:"Exciting Macaron", retail:"$28", market:"$250-$400", rarity:"secret", emoji:"⭐", bg:"linear-gradient(135deg,#fde68a,#f59e0b)", updated:"2026-04-13" },
+      { name:"Labubu Big into Energy", series:"Big into Energy", retail:"$28", market:"$30-$60", rarity:"common", emoji:"⚡", bg:"#fef3c7", updated:"2026-04-13" },
+      { name:"Labubu x SpongeBob", series:"Collaboration", retail:"$16-$20", market:"$30-$80", rarity:"collab", emoji:"🧻", bg:"#fef9c3", updated:"2026-04-13" },
+      { name:"Labubu x Coca-Cola", series:"Collaboration", retail:"$28", market:"$40-$95", rarity:"collab", emoji:"🧃", bg:"#fecaca", updated:"2026-04-13" },
+      { name:"Labubu x Sanrio Characters", series:"Collaboration", retail:"$28", market:"$35-$75", rarity:"collab", emoji:"🎀", bg:"#fce7f3", updated:"2026-04-13" },
+      { name:"Labubu Pin for Love", series:"Pin for Love Series", retail:"$23", market:"$25-$50", rarity:"common", emoji:"💖", bg:"#ffe4e6", updated:"2026-04-13" },
+      { name:"Labubu Fall in Wild", series:"Fall in Wild Series", retail:"$25", market:"$28-$55", rarity:"common", emoji:"🍂", bg:"#fed7aa", updated:"2026-04-13" },
+      { name:"Labubu Zimomo", series:"Zimomo Series", retail:"$14-$18", market:"$20-$60", rarity:"common", emoji:"🐰", bg:"#e0e7ff", updated:"2026-04-13" },
+      { name:"Labubu Secret (Zimomo)", series:"Zimomo Series", retail:"$14-$18", market:"$300+", rarity:"secret", emoji:"💎", bg:"linear-gradient(135deg,#e0e7ff,#c7d2fe)", updated:"2026-04-13" },
+      { name:"Mega Collection 1000% Labubu", series:"Mega Series", retail:"$950", market:"$1200+", rarity:"mega", emoji:"🚀", bg:"linear-gradient(135deg,#fce7f3,#fbcfe8)", updated:"2026-04-13" },
+      { name:"Labubu Lucky Cat", series:"Seasonal Release", retail:"$25-$35", market:"$50-$120", rarity:"seasonal", emoji:"😺", bg:"#fef3c7", updated:"2026-04-13" },
+      { name:"Labubu Holiday Edition", series:"Seasonal Release", retail:"$20-$30", market:"$40-$90", rarity:"seasonal", emoji:"🎄", bg:"#dcfce7", updated:"2026-04-13" },
+      { name:"Labubu 1:00 A.M. Series", series:"1:00 A.M. Series", retail:"$15", market:"$20-$45", rarity:"common", emoji:"🌙", bg:"#e0e7ff", updated:"2026-04-13" },
+      { name:"Labubu Wacky Mart Earphone Case", series:"Wacky Mart Series", retail:"$35", market:"$40-$70", rarity:"common", emoji:"🎧", bg:"#f0e0ff", updated:"2026-04-13" },
+      { name:"Labubu x Pronounce Wings of Fortune", series:"Collaboration", retail:"$30", market:"$55-$120", rarity:"collab", emoji:"🪶", bg:"#fef3c7", updated:"2026-04-13" },
+      { name:"Labubu Let's Checkmate", series:"Checkmate Series", retail:"$25", market:"$28-$50", rarity:"common", emoji:"♟️", bg:"#f3e8ff", updated:"2026-04-13" },
+      { name:"Labubu 10th Anniversary", series:"10th Anniversary", retail:"$17", market:"$25-$60", rarity:"limited", emoji:"🎂", bg:"linear-gradient(135deg,#ede9fe,#ddd6fe)", updated:"2026-04-13" },
+      { name:"Labubu Happy Halloween Pumpkin", series:"Halloween Party", retail:"$25", market:"$35-$75", rarity:"seasonal", emoji:"🎃", bg:"#fed7aa", updated:"2026-04-13" },
+      { name:"Labubu Flip with Me Plush", series:"Flip with Me", retail:"$85", market:"$100-$180", rarity:"limited", emoji:"🧸", bg:"linear-gradient(135deg,#fce7f3,#ede9fe)", updated:"2026-04-13" },
+      { name:"Labubu sacai x Carhartt WIP", series:"Collaboration", retail:"Limited Drop", market:"$500+", rarity:"collab", emoji:"🧥", bg:"linear-gradient(135deg,#d1d5db,#e5e7eb)", updated:"2026-04-13" }
     ];
-    const rows = document.getElementById("rows");
-    const search = document.getElementById("search");
+    let activeFilter = 'all';
+    const grid = document.getElementById('grid');
+    const noRes = document.getElementById('no-results');
+    const searchInput = document.getElementById('search');
+    function rarityClass(r) { return 'rarity-' + r.toLowerCase(); }
     function render(data) {
-      rows.innerHTML = data.map(item => `
-        <tr>
-          <td><div class="name">${item.name}</div><div class="series">${item.series}</div></td>
-          <td>${item.retail}</td>
-          <td>${item.market}</td>
-          <td><span class="pill">${item.rarity}</span></td>
-          <td>${item.updated}</td>
-        </tr>
-      `).join("");
-      document.getElementById("stat-count").textContent = data.length;
-      document.getElementById("stat-secret").textContent = data.filter(i => i.rarity.toLowerCase().includes("secret")).length;
-      document.getElementById("stat-date").textContent = data.length ? data[0].updated : "--";
+      if (!data.length) { grid.innerHTML=''; noRes.style.display='block'; return; }
+      noRes.style.display='none';
+      grid.innerHTML = data.map(i => `
+        <div class="item-card">
+          <div class="item-img" style="background:${i.bg}">${i.emoji}</div>
+          <div class="item-info">
+            <div class="item-name">${i.name}</div>
+            <div class="item-series">${i.series}</div>
+            <div class="price-row">
+              <span class="price-tag price-retail">🏷️ ${i.retail}</span>
+              <span class="price-tag price-market">📈 ${i.market}</span>
+              <span class="rarity-pill ${rarityClass(i.rarity)}">${i.rarity}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      document.getElementById('s-count').textContent = data.length;
+      document.getElementById('s-secret').textContent = data.filter(i=>i.rarity==='secret').length;
+      document.getElementById('s-date').textContent = data.length ? data[0].updated : '--';
     }
-    function resetSearch() { search.value = ""; render(items); }
-    search.addEventListener("input", e => {
-      const q = e.target.value.toLowerCase().trim();
-      render(items.filter(i => i.name.toLowerCase().includes(q) || i.series.toLowerCase().includes(q) || i.rarity.toLowerCase().includes(q)));
-    });
-    render(items);
+    function getFiltered() {
+      const q = searchInput.value.toLowerCase().trim();
+      return items.filter(i => {
+        const matchFilter = activeFilter==='all' || i.rarity===activeFilter;
+        const matchSearch = !q || i.name.toLowerCase().includes(q) || i.series.toLowerCase().includes(q) || i.rarity.includes(q);
+        return matchFilter && matchSearch;
+      });
+    }
+    function setFilter(f) {
+      activeFilter = f;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter===f));
+      render(getFiltered());
+    }
+    searchInput.addEventListener('input', () => render(getFiltered()));
+    setFilter('all');
   </script>
 </body>
 </html>
