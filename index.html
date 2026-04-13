@@ -26,342 +26,230 @@
       --shadow-lg: 0 16px 48px rgba(255,107,157,.18);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Fredoka', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
-    .bg-blobs {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden;
-    }
-    .blob {
-      position: absolute; border-radius: 50%; filter: blur(80px); opacity: .35;
-    }
+    body { font-family: 'Fredoka', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    .bg-blobs { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; }
+    .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .35; }
     .blob-1 { width: 500px; height: 500px; background: #ffb6d5; top: -100px; left: -100px; }
     .blob-2 { width: 400px; height: 400px; background: #c4b5fd; top: 200px; right: -80px; }
     .blob-3 { width: 350px; height: 350px; background: #fbcfe8; bottom: -50px; left: 30%; }
     .blob-4 { width: 300px; height: 300px; background: #a5f3fc; top: 50%; left: 10%; }
-    .wrap {
-      position: relative; z-index: 1;
-      max-width: 1200px; margin: 0 auto; padding: 24px 16px 80px;
-    }
-    .header {
-      text-align: center; padding: 40px 0 24px;
-    }
-    .logo-emoji {
-      font-size: 64px; margin-bottom: 8px;
-      animation: bounce 2s ease-in-out infinite;
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
-    }
-    .badge {
-      display: inline-block;
-      padding: 6px 16px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--pink), var(--purple));
-      color: white;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    h1 {
-      font-size: 48px;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--pink-dark), var(--purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.1;
-      margin-bottom: 10px;
-    }
-    .sub {
-      color: var(--muted);
-      font-size: 17px;
-      max-width: 600px;
-      margin: 0 auto 28px;
-      line-height: 1.5;
-    }
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 28px;
-    }
-    .stat-card {
-      background: var(--card);
-      border: 2px solid var(--line);
-      border-radius: 20px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: var(--shadow);
-      transition: transform .2s;
-    }
+    .wrap { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 24px 16px 80px; }
+    .header { text-align: center; padding: 40px 0 24px; }
+    .logo-emoji { font-size: 64px; margin-bottom: 8px; animation: bounce 2s ease-in-out infinite; }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+    .badge { display: inline-block; padding: 6px 16px; border-radius: 999px; background: linear-gradient(135deg, var(--pink), var(--purple)); color: white; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 12px; }
+    h1 { font-size: 48px; font-weight: 700; background: linear-gradient(135deg, var(--pink-dark), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.1; margin-bottom: 10px; }
+    .sub { color: var(--muted); font-size: 17px; max-width: 600px; margin: 0 auto 28px; line-height: 1.5; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+    .stat-card { background: var(--card); border: 2px solid var(--line); border-radius: 20px; padding: 20px; text-align: center; box-shadow: var(--shadow); transition: transform .2s; }
     .stat-card:hover { transform: translateY(-4px); }
     .stat-icon { font-size: 28px; margin-bottom: 6px; }
     .stat-label { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
     .stat-val { font-size: 28px; font-weight: 700; color: var(--pink-dark); }
-    .controls {
-      display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 20px;
-    }
-    .search {
-      flex: 1 1 300px;
-      padding: 14px 18px;
-      border-radius: 16px;
-      border: 2px solid var(--line);
-      background: white;
-      font-family: inherit;
-      font-size: 15px;
-      outline: none;
-      transition: border-color .2s, box-shadow .2s;
-    }
-    .search:focus {
-      border-color: var(--pink);
-      box-shadow: 0 0 0 4px rgba(255,107,157,.15);
-    }
+    .controls { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 20px; }
+    .search { flex: 1 1 300px; padding: 14px 18px; border-radius: 16px; border: 2px solid var(--line); background: white; font-family: inherit; font-size: 15px; outline: none; transition: border-color .2s, box-shadow .2s; }
+    .search:focus { border-color: var(--pink); box-shadow: 0 0 0 4px rgba(255,107,157,.15); }
     .search::placeholder { color: #d4a0c0; }
-    .filter-btn {
-      padding: 12px 20px;
-      border: 2px solid var(--line);
-      border-radius: 14px;
-      background: white;
-      font-family: inherit;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all .2s;
-    }
-    .filter-btn:hover, .filter-btn.active {
-      border-color: var(--pink);
-      background: var(--pink-light);
-      color: var(--pink-dark);
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 18px;
-    }
-    .item-card {
-      background: var(--card);
-      border: 2px solid var(--line);
-      border-radius: 24px;
-      padding: 20px;
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      box-shadow: var(--shadow);
-      transition: all .25s;
-      cursor: default;
-    }
-    .item-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-lg);
-      border-color: var(--pink);
-    }
-    .item-img {
-      width: 80px; height: 80px;
-      border-radius: 18px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 40px;
-      flex-shrink: 0;
-    }
+    .filter-btn { padding: 12px 20px; border: 2px solid var(--line); border-radius: 14px; background: white; font-family: inherit; font-size: 14px; font-weight: 600; color: var(--muted); cursor: pointer; transition: all .2s; }
+    .filter-btn:hover, .filter-btn.active { border-color: var(--pink); background: var(--pink-light); color: var(--pink-dark); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; }
+    .item-card { background: var(--card); border: 2px solid var(--line); border-radius: 24px; padding: 20px; display: flex; gap: 16px; align-items: center; box-shadow: var(--shadow); transition: all .25s; cursor: pointer; }
+    .item-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--pink); }
+    .item-img { width: 80px; height: 80px; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 40px; flex-shrink: 0; }
     .item-info { flex: 1; min-width: 0; }
-    .item-name {
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 2px;
-      color: var(--text);
-    }
-    .item-series {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-    .price-row {
-      display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
-    }
-    .price-tag {
-      display: inline-flex; align-items: center; gap: 4px;
-      padding: 4px 10px;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 600;
-    }
-    .price-retail {
-      background: var(--mint-light);
-      color: #047857;
-    }
-    .price-market {
-      background: var(--pink-light);
-      color: var(--pink-dark);
-    }
-    .rarity-pill {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 10px;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .04em;
-    }
+    .item-name { font-size: 16px; font-weight: 700; margin-bottom: 2px; color: var(--text); }
+    .item-series { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+    .price-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .price-tag { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 10px; font-size: 13px; font-weight: 600; }
+    .price-retail { background: var(--mint-light); color: #047857; }
+    .price-market { background: var(--pink-light); color: var(--pink-dark); }
+    .rarity-pill { display: inline-block; padding: 4px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
     .rarity-common { background: #e0f2fe; color: #0369a1; }
     .rarity-secret { background: linear-gradient(135deg, #fde68a, #fbbf24); color: #92400e; }
     .rarity-limited { background: linear-gradient(135deg, #e9d5ff, #c084fc); color: #6b21a8; }
     .rarity-seasonal { background: #ffe4e6; color: #be123c; }
     .rarity-collab { background: linear-gradient(135deg, #a5f3fc, #67e8f9); color: #155e75; }
     .rarity-mega { background: linear-gradient(135deg, #fecdd3, #ff6b9d); color: #881337; }
-    .footer {
-      text-align: center;
-      margin-top: 40px;
-      padding: 24px;
-      color: var(--muted);
-      font-size: 14px;
-    }
+    .footer { text-align: center; margin-top: 40px; padding: 24px; color: var(--muted); font-size: 14px; }
     .footer a { color: var(--pink); text-decoration: none; }
     .sparkle { display: inline-block; animation: sparkle 1.5s ease-in-out infinite; }
-    @keyframes sparkle {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: .6; transform: scale(1.2); }
-    }
-    .no-results {
-      text-align: center;
-      padding: 60px 20px;
-      color: var(--muted);
-      font-size: 18px;
-    }
-    @media (max-width: 700px) {
-      h1 { font-size: 36px; }
-      .stats { grid-template-columns: 1fr; }
-      .grid { grid-template-columns: 1fr; }
-      .logo-emoji { font-size: 48px; }
-    }
+    @keyframes sparkle { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .6; transform: scale(1.2); } }
+    .no-results { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 18px; }
+    .affiliate-disclosure { text-align: center; margin-bottom: 20px; padding: 10px 16px; background: var(--pink-light); border-radius: 12px; font-size: 12px; color: var(--muted); }
+    /* Modal */
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(61,31,58,.6); backdrop-filter: blur(6px); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
+    .modal-overlay.active { display: flex; }
+    .modal { background: var(--card); border-radius: 28px; max-width: 480px; width: 100%; padding: 32px; box-shadow: 0 24px 64px rgba(255,107,157,.25); position: relative; animation: modalIn .3s ease; }
+    @keyframes modalIn { from { opacity: 0; transform: scale(.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+    .modal-close { position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--line); background: white; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .2s; }
+    .modal-close:hover { background: var(--pink-light); border-color: var(--pink); }
+    .modal-image { width: 100%; height: 220px; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; overflow: hidden; }
+    .modal-image img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .modal-image .emoji-fallback { font-size: 80px; }
+    .modal-name { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+    .modal-series { font-size: 14px; color: var(--muted); margin-bottom: 12px; }
+    .modal-prices { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 20px; }
+    .modal-divider { height: 1px; background: var(--line); margin: 16px 0; }
+    .buy-buttons { display: flex; flex-direction: column; gap: 10px; }
+    .buy-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 20px; border-radius: 16px; font-family: inherit; font-size: 15px; font-weight: 600; text-decoration: none; color: white; transition: all .2s; border: none; cursor: pointer; }
+    .buy-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.15); }
+    .buy-btn-ebay { background: linear-gradient(135deg, #e53238, #f5af02); }
+    .buy-btn-amazon { background: linear-gradient(135deg, #ff9900, #ffad33); }
+    .buy-btn-popmart { background: linear-gradient(135deg, var(--pink-dark), var(--purple)); }
+    .buy-btn-icon { font-size: 18px; }
+    @media (max-width: 700px) { h1 { font-size: 36px; } .stats { grid-template-columns: 1fr; } .grid { grid-template-columns: 1fr; } .logo-emoji { font-size: 48px; } .modal { padding: 24px; margin: 10px; } .modal-image { height: 180px; } }
   </style>
 </head>
 <body>
-  <div class="bg-blobs">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
-    <div class="blob blob-4"></div>
-  </div>
+  <div class="bg-blobs"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div><div class="blob blob-4"></div></div>
   <div class="wrap">
-    <header class="header">
-      <div class="logo-emoji">👾</div>
-      <div class="badge"><span class="sparkle">✨</span> Collector Tracker <span class="sparkle">✨</span></div>
+    <div class="header">
+      <div class="logo-emoji">&#x1F47E;</div>
+      <div class="badge"><span class="sparkle">&#x2728;</span> Collector Tracker <span class="sparkle">&#x2728;</span></div>
       <h1>Labubu Valuations</h1>
-      <p class="sub">
-        Your cute guide to retail & resale values for every Labubu figure, secret pull, mega drop, and collab release 🌸
-      </p>
-      <div class="stats">
-        <div class="stat-card">
-          <div class="stat-icon">📦</div>
-          <div class="stat-label">Tracked Items</div>
-          <div class="stat-val" id="s-count">0</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon">🌟</div>
-          <div class="stat-label">Secret Editions</div>
-          <div class="stat-val" id="s-secret">0</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon">📅</div>
-          <div class="stat-label">Last Updated</div>
-          <div class="stat-val" id="s-date" style="font-size:18px">--</div>
-        </div>
-      </div>
-    </header>
+      <p class="sub">Your cute guide to retail & resale values for every Labubu figure, secret pull, mega drop, and collab release &#x1F338;</p>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="stat-icon">&#x1F4E6;</div><div class="stat-label">Tracked Items</div><div class="stat-val" id="s-count">0</div></div>
+      <div class="stat-card"><div class="stat-icon">&#x1F31F;</div><div class="stat-label">Secret Editions</div><div class="stat-val" id="s-secret">0</div></div>
+      <div class="stat-card"><div class="stat-icon">&#x1F4C5;</div><div class="stat-label">Last Updated</div><div class="stat-val" id="s-date">--</div></div>
+    </div>
+    <div class="affiliate-disclosure">&#x1F4CB; <strong>Affiliate Disclosure:</strong> Some links on this page are affiliate links. We may earn a small commission at no extra cost to you if you make a purchase through these links.</div>
     <div class="controls">
-      <input class="search" id="search" type="text" placeholder="🔍 Search Labubu by name, series, or rarity..." />
-      <button class="filter-btn" data-filter="all" onclick="setFilter('all')">All</button>
-      <button class="filter-btn" data-filter="secret" onclick="setFilter('secret')">🌟 Secret</button>
-      <button class="filter-btn" data-filter="limited" onclick="setFilter('limited')">💎 Limited</button>
-      <button class="filter-btn" data-filter="collab" onclick="setFilter('collab')">🤝 Collab</button>
+      <input class="search" id="search" type="text" placeholder="&#x1F50D; Search Labubu by name, series, or rarity..." aria-label="Search Labubu by name, series, or rarity">
+      <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">All</button>
+      <button class="filter-btn" data-filter="secret" onclick="setFilter('secret')">&#x1F31F; Secret</button>
+      <button class="filter-btn" data-filter="limited" onclick="setFilter('limited')">&#x1F48E; Limited</button>
+      <button class="filter-btn" data-filter="collab" onclick="setFilter('collab')">&#x1F91D; Collab</button>
     </div>
     <div class="grid" id="grid"></div>
-    <div class="no-results" id="no-results" style="display:none">
-      😢 No Labubus found... try a different search!
+    <div class="no-results" id="no-results" style="display:none">&#x1F622; No Labubus found... try a different search!</div>
+    <div class="footer">
+      <p>Made with &#x1F496; for Labubu collectors everywhere</p>
+      <p>Prices are estimated market ranges. <a href="https://www.popmart.com/us/collection/11" target="_blank" rel="noopener">Browse official Pop Mart releases</a></p>
     </div>
-    <footer class="footer">
-      Made with 💖 for Labubu collectors everywhere<br>
-      Prices are estimated market ranges. <a href="https://www.popmart.com/us/collection/11" target="_blank">Browse official Pop Mart releases</a>
-    </footer>
+  </div>
+  <!-- Modal -->
+  <div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">&#x2715;</button>
+      <div class="modal-image" id="modal-image"></div>
+      <div class="modal-name" id="modal-name"></div>
+      <div class="modal-series" id="modal-series"></div>
+      <div class="modal-prices" id="modal-prices"></div>
+      <div class="modal-divider"></div>
+      <div class="buy-buttons" id="buy-buttons"></div>
+    </div>
   </div>
   <script>
-    const items = [
-      { name:"Labubu Classic Blind Box", series:"The Monsters", retail:"$12-$16", market:"$15-$40", rarity:"common", emoji:"👾", bg:"#ffe0ec", updated:"2026-04-13" },
-      { name:"Labubu Have a Seat - Strawberry", series:"Have a Seat Series", retail:"$22", market:"$35-$65", rarity:"common", emoji:"🍓", bg:"#fecdd3", updated:"2026-04-13" },
-      { name:"Labubu Have a Seat - Blueberry", series:"Have a Seat Series", retail:"$22", market:"$30-$55", rarity:"common", emoji:"🪷", bg:"#dbeafe", updated:"2026-04-13" },
-      { name:"Labubu Macaron - Lychee Berry", series:"Exciting Macaron", retail:"$28", market:"$45-$90", rarity:"common", emoji:"🫇", bg:"#fce7f3", updated:"2026-04-13" },
-      { name:"Labubu Macaron - Sea Salt Coconut", series:"Exciting Macaron", retail:"$28", market:"$35-$70", rarity:"common", emoji:"🥥", bg:"#ecfdf5", updated:"2026-04-13" },
-      { name:"Labubu Macaron - Toffee", series:"Exciting Macaron", retail:"$28", market:"$30-$55", rarity:"common", emoji:"🍬", bg:"#fef3c7", updated:"2026-04-13" },
-      { name:"Labubu Secret (Have a Seat)", series:"Have a Seat Series", retail:"$22", market:"$200-$350", rarity:"secret", emoji:"🌟", bg:"linear-gradient(135deg,#fef9c3,#fde68a)", updated:"2026-04-13" },
-      { name:"Labubu Secret (Macaron)", series:"Exciting Macaron", retail:"$28", market:"$250-$400", rarity:"secret", emoji:"⭐", bg:"linear-gradient(135deg,#fde68a,#f59e0b)", updated:"2026-04-13" },
-      { name:"Labubu Big into Energy", series:"Big into Energy", retail:"$28", market:"$30-$60", rarity:"common", emoji:"⚡", bg:"#fef3c7", updated:"2026-04-13" },
-      { name:"Labubu x SpongeBob", series:"Collaboration", retail:"$16-$20", market:"$30-$80", rarity:"collab", emoji:"🧻", bg:"#fef9c3", updated:"2026-04-13" },
-      { name:"Labubu x Coca-Cola", series:"Collaboration", retail:"$28", market:"$40-$95", rarity:"collab", emoji:"🧃", bg:"#fecaca", updated:"2026-04-13" },
-      { name:"Labubu x Sanrio Characters", series:"Collaboration", retail:"$28", market:"$35-$75", rarity:"collab", emoji:"🎀", bg:"#fce7f3", updated:"2026-04-13" },
-      { name:"Labubu Pin for Love", series:"Pin for Love Series", retail:"$23", market:"$25-$50", rarity:"common", emoji:"💖", bg:"#ffe4e6", updated:"2026-04-13" },
-      { name:"Labubu Fall in Wild", series:"Fall in Wild Series", retail:"$25", market:"$28-$55", rarity:"common", emoji:"🍂", bg:"#fed7aa", updated:"2026-04-13" },
-      { name:"Labubu Zimomo", series:"Zimomo Series", retail:"$14-$18", market:"$20-$60", rarity:"common", emoji:"🐰", bg:"#e0e7ff", updated:"2026-04-13" },
-      { name:"Labubu Secret (Zimomo)", series:"Zimomo Series", retail:"$14-$18", market:"$300+", rarity:"secret", emoji:"💎", bg:"linear-gradient(135deg,#e0e7ff,#c7d2fe)", updated:"2026-04-13" },
-      { name:"Mega Collection 1000% Labubu", series:"Mega Series", retail:"$950", market:"$1200+", rarity:"mega", emoji:"🚀", bg:"linear-gradient(135deg,#fce7f3,#fbcfe8)", updated:"2026-04-13" },
-      { name:"Labubu Lucky Cat", series:"Seasonal Release", retail:"$25-$35", market:"$50-$120", rarity:"seasonal", emoji:"😺", bg:"#fef3c7", updated:"2026-04-13" },
-      { name:"Labubu Holiday Edition", series:"Seasonal Release", retail:"$20-$30", market:"$40-$90", rarity:"seasonal", emoji:"🎄", bg:"#dcfce7", updated:"2026-04-13" },
-      { name:"Labubu 1:00 A.M. Series", series:"1:00 A.M. Series", retail:"$15", market:"$20-$45", rarity:"common", emoji:"🌙", bg:"#e0e7ff", updated:"2026-04-13" },
-      { name:"Labubu Wacky Mart Earphone Case", series:"Wacky Mart Series", retail:"$35", market:"$40-$70", rarity:"common", emoji:"🎧", bg:"#f0e0ff", updated:"2026-04-13" },
-      { name:"Labubu x Pronounce Wings of Fortune", series:"Collaboration", retail:"$30", market:"$55-$120", rarity:"collab", emoji:"🪶", bg:"#fef3c7", updated:"2026-04-13" },
-      { name:"Labubu Let's Checkmate", series:"Checkmate Series", retail:"$25", market:"$28-$50", rarity:"common", emoji:"♟️", bg:"#f3e8ff", updated:"2026-04-13" },
-      { name:"Labubu 10th Anniversary", series:"10th Anniversary", retail:"$17", market:"$25-$60", rarity:"limited", emoji:"🎂", bg:"linear-gradient(135deg,#ede9fe,#ddd6fe)", updated:"2026-04-13" },
-      { name:"Labubu Happy Halloween Pumpkin", series:"Halloween Party", retail:"$25", market:"$35-$75", rarity:"seasonal", emoji:"🎃", bg:"#fed7aa", updated:"2026-04-13" },
-      { name:"Labubu Flip with Me Plush", series:"Flip with Me", retail:"$85", market:"$100-$180", rarity:"limited", emoji:"🧸", bg:"linear-gradient(135deg,#fce7f3,#ede9fe)", updated:"2026-04-13" },
-      { name:"Labubu sacai x Carhartt WIP", series:"Collaboration", retail:"Limited Drop", market:"$500+", rarity:"collab", emoji:"🧥", bg:"linear-gradient(135deg,#d1d5db,#e5e7eb)", updated:"2026-04-13" }
-    ];
-    let activeFilter = 'all';
-    const grid = document.getElementById('grid');
-    const noRes = document.getElementById('no-results');
-    const searchInput = document.getElementById('search');
-    function rarityClass(r) { return 'rarity-' + r.toLowerCase(); }
-    function render(data) {
-      if (!data.length) { grid.innerHTML=''; noRes.style.display='block'; return; }
-      noRes.style.display='none';
-      grid.innerHTML = data.map(i => `
-        <div class="item-card">
-          <div class="item-img" style="background:${i.bg}">${i.emoji}</div>
-          <div class="item-info">
-            <div class="item-name">${i.name}</div>
-            <div class="item-series">${i.series}</div>
-            <div class="price-row">
-              <span class="price-tag price-retail">🏷️ ${i.retail}</span>
-              <span class="price-tag price-market">📈 ${i.market}</span>
-              <span class="rarity-pill ${rarityClass(i.rarity)}">${i.rarity}</span>
-            </div>
-          </div>
+const items = [
+  { name:"Labubu Classic Blind Box", series:"The Monsters", retail:"$12-$16", market:"$15-$40", rarity:"common", emoji:"\u{1F47E}", bg:"#ffe0ec", updated:"2026-04-13", image:"https://m.media-amazon.com/images/I/71DhVBqLDaL._AC_SL1500_.jpg", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+classic+blind+box&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+classic+blind+box&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+classic" },
+  { name:"Labubu Have a Seat - Strawberry", series:"Have a Seat Series", retail:"$22", market:"$35-$65", rarity:"common", emoji:"\u{1F353}", bg:"#fecdd3", updated:"2026-04-13", image:"https://m.media-amazon.com/images/I/61qZqE7RHwL._AC_SL1500_.jpg", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+have+a+seat+strawberry&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+have+a+seat+strawberry&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+have+a+seat" },
+  { name:"Labubu Have a Seat - Blueberry", series:"Have a Seat Series", retail:"$22", market:"$30-$55", rarity:"common", emoji:"\u{1FAB7}", bg:"#dbeafe", updated:"2026-04-13", image:"https://m.media-amazon.com/images/I/61qZqE7RHwL._AC_SL1500_.jpg", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+have+a+seat+blueberry&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+have+a+seat+blueberry&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+have+a+seat" },
+  { name:"Labubu Macaron - Lychee Berry", series:"Exciting Macaron", retail:"$28", market:"$45-$90", rarity:"common", emoji:"\u{1FAC7}", bg:"#fce7f3", updated:"2026-04-13", image:"https://m.media-amazon.com/images/I/71bqoKNCA-L._AC_SL1500_.jpg", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+macaron+lychee+berry&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+macaron+lychee+berry&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+macaron" },
+  { name:"Labubu Macaron - Sea Salt Coconut", series:"Exciting Macaron", retail:"$28", market:"$35-$70", rarity:"common", emoji:"\u{1F965}", bg:"#ecfdf5", updated:"2026-04-13", image:"https://m.media-amazon.com/images/I/71bqoKNCA-L._AC_SL1500_.jpg", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+macaron+sea+salt+coconut&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+macaron+sea+salt+coconut&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+macaron" },
+  { name:"Labubu Macaron - Toffee", series:"Exciting Macaron", retail:"$28", market:"$30-$55", rarity:"common", emoji:"\u{1F36C}", bg:"#fef3c7", updated:"2026-04-13", image:"https://m.media-amazon.com/images/I/71bqoKNCA-L._AC_SL1500_.jpg", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+macaron+toffee&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+macaron+toffee&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+macaron" },
+  { name:"Labubu Secret (Have a Seat)", series:"Have a Seat Series", retail:"$22", market:"$200-$350", rarity:"secret", emoji:"\u{1F31F}", bg:"linear-gradient(135deg,#fef9c3,#fde68a)", updated:"2026-04-13", image:"", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+secret+have+a+seat&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+secret+have+a+seat&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+have+a+seat" },
+  { name:"Labubu Secret (Macaron)", series:"Exciting Macaron", retail:"$28", market:"$250-$400", rarity:"secret", emoji:"\u{2B50}", bg:"linear-gradient(135deg,#fde68a,#f59e0b)", updated:"2026-04-13", image:"", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+secret+macaron&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+secret+macaron&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+macaron" },
+  { name:"Labubu Big into Energy", series:"Big into Energy", retail:"$28", market:"$30-$60", rarity:"common", emoji:"\u{26A1}", bg:"#fef3c7", updated:"2026-04-13", image:"", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+big+into+energy&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+big+into+energy&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+big+into+energy" },
+  { name:"Labubu x SpongeBob", series:"Collaboration", retail:"$16-$20", market:"$30-$80", rarity:"collab", emoji:"\u{1F9FB}", bg:"#fef9c3", updated:"2026-04-13", image:"", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+spongebob&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+spongebob&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+spongebob" },
+  { name:"Labubu x Coca-Cola", series:"Collaboration", retail:"$28", market:"$40-$95", rarity:"collab", emoji:"\u{1F9C3}", bg:"#fecaca", updated:"2026-04-13", image:"", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+coca+cola&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+coca+cola&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+coca+cola" },
+  { name:"Labubu x Sanrio Characters", series:"Collaboration", retail:"$28", market:"$35-$75", rarity:"collab", emoji:"\u{1F380}", bg:"#fce7f3", updated:"2026-04-13", image:"", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+sanrio&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+sanrio&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+sanrio" },
+  { name:"Labubu Pin for Love", series:"Pin for Love Series", retail:"$23", market:"$25-$50", rarity:"common", emoji:"\u{1F496}", bg:"#ffe4e6", updated:"2026-04-13", image:"", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+pin+for+love&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+pin+for+love&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+pin+for+love" },
+  { name:"Labubu Fall in Wild", series:"Fall in Wild Series", retail:"$25", market:"$28-$55", rarity:"common", emoji:"\u{1F342}", bg:"#fed7aa", updated:"2026-04-13", image:"", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+fall+in+wild&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+fall+in+wild&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+fall+in+wild" },
+  { name:"Labubu Zimomo", series:"Zimomo Series", retail:"$14-$18", market:"$20-$60", rarity:"common", emoji:"\u{1F430}", bg:"#e0e7ff", updated:"2026-04-13", image:"", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+zimomo&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+zimomo&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+zimomo" },
+  { name:"Labubu Secret (Zimomo)", series:"Zimomo Series", retail:"$14-$18", market:"$300+", rarity:"secret", emoji:"\u{1F48E}", bg:"linear-gradient(135deg,#e0e7ff,#c7d2fe)", updated:"2026-04-13", image:"", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+secret+zimomo&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+secret+zimomo&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+zimomo" },
+  { name:"Mega Collection 1000% Labubu", series:"Mega Series", retail:"$950", market:"$1200+", rarity:"mega", emoji:"\u{1F680}", bg:"linear-gradient(135deg,#fce7f3,#fbcfe8)", updated:"2026-04-13", image:"", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+1000+mega&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+1000+mega&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+mega" },
+  { name:"Labubu Lucky Cat", series:"Seasonal Release", retail:"$25-$35", market:"$50-$120", rarity:"seasonal", emoji:"\u{1F63A}", bg:"#fef3c7", updated:"2026-04-13", image:"", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+lucky+cat&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+lucky+cat&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+lucky+cat" },
+  { name:"Labubu Holiday Edition", series:"Seasonal Release", retail:"$20-$30", market:"$40-$90", rarity:"seasonal", emoji:"\u{1F384}", bg:"#dcfce7", updated:"2026-04-13", image:"", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+holiday+edition&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+holiday+edition&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+holiday" },
+  { name:"Labubu 1:00 A.M. Series", series:"1:00 A.M. Series", retail:"$15", market:"$20-$45", rarity:"common", emoji:"\u{1F319}", bg:"#e0e7ff", updated:"2026-04-13", image:"", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+1am+series&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+1am+series&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+1am" },
+  { name:"Labubu Wacky Mart Earphone Case", series:"Wacky Mart Series", retail:"$35", market:"$40-$70", rarity:"common", emoji:"\u{1F3A7}", bg:"#f0e0ff", updated:"2026-04-13", image:"", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+wacky+mart+earphone&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+wacky+mart+earphone&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+wacky+mart" },
+  { name:"Labubu x Pronounce Wings of Fortune", series:"Collaboration", retail:"$30", market:"$55-$120", rarity:"collab", emoji:"\u{1FAB6}", bg:"#fef3c7", updated:"2026-04-13", image:"", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+pronounce+wings+fortune&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+pronounce+wings+fortune&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+pronounce" },
+  { name:"Labubu Let's Checkmate", series:"Checkmate Series", retail:"$25", market:"$28-$50", rarity:"common", emoji:"\u{265F}\u{FE0F}", bg:"#f3e8ff", updated:"2026-04-13", image:"", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+checkmate&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+checkmate&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+checkmate" },
+  { name:"Labubu 10th Anniversary", series:"10th Anniversary", retail:"$17", market:"$25-$60", rarity:"limited", emoji:"\u{1F382}", bg:"linear-gradient(135deg,#ede9fe,#ddd6fe)", updated:"2026-04-13", image:"", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+10th+anniversary&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+10th+anniversary&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+10th+anniversary" },
+  { name:"Labubu Happy Halloween Pumpkin", series:"Halloween Party", retail:"$25", market:"$35-$75", rarity:"seasonal", emoji:"\u{1F383}", bg:"#fed7aa", updated:"2026-04-13", image:"", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+halloween+pumpkin&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+halloween+pumpkin&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+halloween" },
+  { name:"Labubu Flip with Me Plush", series:"Flip with Me", retail:"$85", market:"$100-$180", rarity:"limited", emoji:"\u{1F9F8}", bg:"linear-gradient(135deg,#fce7f3,#ede9fe)", updated:"2026-04-13", image:"", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+flip+with+me+plush&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+flip+with+me+plush&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+flip+with+me" },
+  { name:"Labubu sacai x Carhartt WIP", series:"Collaboration", retail:"Limited Drop", market:"$500+", rarity:"collab", emoji:"\u{1F9E5}", bg:"linear-gradient(135deg,#d1d5db,#e5e7eb)", updated:"2026-04-13", image:"", ebay:"https://www.ebay.com/sch/i.html?_nkw=labubu+sacai+carhartt&mkcid=1&mkrid=711-53200-19255-0&campid=YOUR_EBAY_CAMP_ID&toolid=10001", amazon:"https://www.amazon.com/s?k=labubu+sacai+carhartt&tag=YOUR_AMAZON_TAG", popmart:"https://www.popmart.com/us/search?keyword=labubu+sacai" }
+];
+let activeFilter = 'all';
+const grid = document.getElementById('grid');
+const noRes = document.getElementById('no-results');
+const searchInput = document.getElementById('search');
+const overlay = document.getElementById('modal-overlay');
+
+function rarityClass(r) { return 'rarity-' + r.toLowerCase(); }
+
+function render(data) {
+  if (!data.length) { grid.innerHTML=''; noRes.style.display='block'; return; }
+  noRes.style.display='none';
+  grid.innerHTML = data.map((i,idx) => `
+    <div class="item-card" onclick="openModal(${items.indexOf(i)})">
+      <div class="item-img" style="background:${i.bg}">${i.emoji}</div>
+      <div class="item-info">
+        <div class="item-name">${i.name}</div>
+        <div class="item-series">${i.series}</div>
+        <div class="price-row">
+          <span class="price-tag price-retail">\u{1F3F7}\u{FE0F} ${i.retail}</span>
+          <span class="price-tag price-market">\u{1F4C8} ${i.market}</span>
+          <span class="rarity-pill ${rarityClass(i.rarity)}">${i.rarity}</span>
         </div>
-      `).join('');
-      document.getElementById('s-count').textContent = data.length;
-      document.getElementById('s-secret').textContent = data.filter(i=>i.rarity==='secret').length;
-      document.getElementById('s-date').textContent = data.length ? data[0].updated : '--';
-    }
-    function getFiltered() {
-      const q = searchInput.value.toLowerCase().trim();
-      return items.filter(i => {
-        const matchFilter = activeFilter==='all' || i.rarity===activeFilter;
-        const matchSearch = !q || i.name.toLowerCase().includes(q) || i.series.toLowerCase().includes(q) || i.rarity.includes(q);
-        return matchFilter && matchSearch;
-      });
-    }
-    function setFilter(f) {
-      activeFilter = f;
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter===f));
-      render(getFiltered());
-    }
-    searchInput.addEventListener('input', () => render(getFiltered()));
-    setFilter('all');
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('s-count').textContent = data.length;
+  document.getElementById('s-secret').textContent = data.filter(i=>i.rarity==='secret').length;
+  document.getElementById('s-date').textContent = data.length ? data[0].updated : '--';
+}
+
+function openModal(idx) {
+  const i = items[idx];
+  const imgEl = document.getElementById('modal-image');
+  if (i.image) {
+    imgEl.innerHTML = `<img src="${i.image}" alt="${i.name}" onerror="this.parentElement.innerHTML='<span class=emoji-fallback>${i.emoji}</span>'">`;
+  } else {
+    imgEl.innerHTML = `<span class="emoji-fallback">${i.emoji}</span>`;
+  }
+  imgEl.style.background = i.bg;
+  document.getElementById('modal-name').textContent = i.name;
+  document.getElementById('modal-series').textContent = i.series;
+  document.getElementById('modal-prices').innerHTML = `
+    <span class="price-tag price-retail">\u{1F3F7}\u{FE0F} Retail: ${i.retail}</span>
+    <span class="price-tag price-market">\u{1F4C8} Market: ${i.market}</span>
+    <span class="rarity-pill ${rarityClass(i.rarity)}">${i.rarity}</span>
+  `;
+  document.getElementById('buy-buttons').innerHTML = `
+    <a href="${i.ebay}" target="_blank" rel="noopener" class="buy-btn buy-btn-ebay"><span class="buy-btn-icon">\u{1F6D2}</span> Buy on eBay</a>
+    <a href="${i.amazon}" target="_blank" rel="noopener" class="buy-btn buy-btn-amazon"><span class="buy-btn-icon">\u{1F4E6}</span> Buy on Amazon</a>
+    <a href="${i.popmart}" target="_blank" rel="noopener" class="buy-btn buy-btn-popmart"><span class="buy-btn-icon">\u{1F381}</span> Buy on Pop Mart</a>
+  `;
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  overlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+function getFiltered() {
+  const q = searchInput.value.toLowerCase().trim();
+  return items.filter(i => {
+    const matchFilter = activeFilter==='all' || i.rarity===activeFilter;
+    const matchSearch = !q || i.name.toLowerCase().includes(q) || i.series.toLowerCase().includes(q) || i.rarity.includes(q);
+    return matchFilter && matchSearch;
+  });
+}
+
+function setFilter(f) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter===f));
+  render(getFiltered());
+}
+
+searchInput.addEventListener('input', () => render(getFiltered()));
+setFilter('all');
   </script>
 </body>
 </html>
