@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Labubu Valuations</title>
+  <style>
+    :root {
+      --bg: #f7f4ee;
+      --surface: #ffffff;
+      --text: #221f1a;
+      --muted: #6f6a63;
+      --line: #e5ddd3;
+      --accent: #0d6c70;
+      --accent-soft: #e7f3f3;
+      --shadow: 0 10px 30px rgba(0,0,0,.06);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #f8f4ef 0%, #f4efe8 100%);
+      color: var(--text);
+    }
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 18px 80px;
+    }
+    .hero { padding: 28px 0 20px; }
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    h1 { font-size: 44px; line-height: 1.05; margin: 0 0 12px; }
+    .sub {
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 760px;
+      line-height: 1.6;
+      margin: 0 0 24px;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 20px 0 28px;
+    }
+    .stat {
+      background: rgba(255,255,255,.7);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .stat-label { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+    .stat-value { font-size: 26px; font-weight: 700; }
+    .controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .search {
+      flex: 1 1 280px;
+      min-width: 260px;
+      padding: 13px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      font-size: 16px;
+      outline: none;
+    }
+    .search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(13,108,112,.12);
+    }
+    .button {
+      border: 0;
+      border-radius: 12px;
+      background: var(--accent);
+      color: white;
+      padding: 13px 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .panel {
+      background: rgba(255,255,255,.8);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; min-width: 880px; border-collapse: collapse; }
+    th, td {
+      text-align: left;
+      padding: 15px 16px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: middle;
+    }
+    th {
+      background: #161514;
+      color: white;
+      font-size: 13px;
+      letter-spacing: .02em;
+    }
+    tbody tr:hover td { background: #fbfaf8; }
+    .name { font-weight: 700; }
+    .series { color: var(--muted); font-size: 14px; margin-top: 4px; }
+    .pill {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .footer-note {
+      color: var(--muted);
+      font-size: 14px;
+      padding: 16px 2px 0;
+      line-height: 1.6;
+    }
+    @media (max-width: 820px) {
+      h1 { font-size: 34px; }
+      .sub { font-size: 16px; }
+      .stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Collector Tracker</div>
+      <h1>Labubu Valuations</h1>
+      <p class="sub">
+        A clean tracker for estimated retail and resale values across Labubu figures,
+        secret pulls, and larger-format releases.
+      </p>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-label">Tracked items</div>
+          <div class="stat-value" id="stat-count">0</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Secret editions</div>
+          <div class="stat-value" id="stat-secret">0</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Last updated</div>
+          <div class="stat-value" id="stat-date">--</div>
+        </div>
+      </div>
+    </section>
+    <div class="controls">
+      <input id="search" class="search" type="text" placeholder="Search by name, series, or rarity" />
+      <button class="button" onclick="resetSearch()">Reset</button>
+    </div>
+    <section class="panel">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Retail</th>
+              <th>Market Range</th>
+              <th>Rarity</th>
+              <th>Last Updated</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </section>
+    <p class="footer-note">
+      These are starter placeholder values. Next phase: add every Labubu release with sourced pricing.
+    </p>
+  </div>
+  <script>
+    const items = [
+      { name: "Labubu Classic Blind Box", series: "The Monsters", retail: "$12-$16", market: "$15-$40", rarity: "Common", updated: "2026-04-13" },
+      { name: "Labubu Have a Seat", series: "Have a Seat Series", retail: "$13-$17", market: "$20-$55", rarity: "Common", updated: "2026-04-13" },
+      { name: "Labubu Macaron", series: "Macaron Series", retail: "$14-$18", market: "$25-$70", rarity: "Common", updated: "2026-04-13" },
+      { name: "Labubu Secret (Have a Seat)", series: "Have a Seat Series", retail: "$13-$17", market: "$200+", rarity: "Secret", updated: "2026-04-13" },
+      { name: "Labubu Secret (Macaron)", series: "Macaron Series", retail: "$14-$18", market: "$250+", rarity: "Secret", updated: "2026-04-13" },
+      { name: "Labubu x SpongeBob", series: "Collaboration", retail: "$16-$20", market: "$30-$80", rarity: "Collab", updated: "2026-04-13" },
+      { name: "Mega Collection 1000% Labubu", series: "Mega Series", retail: "$950", market: "$1200+", rarity: "Limited", updated: "2026-04-13" },
+      { name: "Labubu Plush Keychain", series: "The Monsters Plush", retail: "$10-$14", market: "$15-$45", rarity: "Common", updated: "2026-04-13" },
+      { name: "Labubu Zimomo", series: "Zimomo Series", retail: "$14-$18", market: "$20-$60", rarity: "Common", updated: "2026-04-13" },
+      { name: "Labubu Secret (Zimomo)", series: "Zimomo Series", retail: "$14-$18", market: "$300+", rarity: "Secret", updated: "2026-04-13" },
+      { name: "Labubu Lucky Cat", series: "Seasonal Release", retail: "$25-$35", market: "$50-$120", rarity: "Seasonal", updated: "2026-04-13" },
+      { name: "Labubu Elf on the Shelf", series: "Holiday Edition", retail: "$20-$30", market: "$40-$90", rarity: "Seasonal", updated: "2026-04-13" }
+    ];
+    const rows = document.getElementById("rows");
+    const search = document.getElementById("search");
+    function render(data) {
+      rows.innerHTML = data.map(item => `
+        <tr>
+          <td><div class="name">${item.name}</div><div class="series">${item.series}</div></td>
+          <td>${item.retail}</td>
+          <td>${item.market}</td>
+          <td><span class="pill">${item.rarity}</span></td>
+          <td>${item.updated}</td>
+        </tr>
+      `).join("");
+      document.getElementById("stat-count").textContent = data.length;
+      document.getElementById("stat-secret").textContent = data.filter(i => i.rarity.toLowerCase().includes("secret")).length;
+      document.getElementById("stat-date").textContent = data.length ? data[0].updated : "--";
+    }
+    function resetSearch() { search.value = ""; render(items); }
+    search.addEventListener("input", e => {
+      const q = e.target.value.toLowerCase().trim();
+      render(items.filter(i => i.name.toLowerCase().includes(q) || i.series.toLowerCase().includes(q) || i.rarity.toLowerCase().includes(q)));
+    });
+    render(items);
+  </script>
+</body>
+</html>
